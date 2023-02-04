@@ -2,7 +2,9 @@
 <html>
 
 <head>
-    <link rel="stylesheet" href="customisation.css">
+    <link rel="stylesheet" href="..\customisation\action_list.css">
+    <link rel="stylesheet" href="..\customisation\collapsible.css">
+    <link rel="stylesheet" href="..\customisation\main_page.css">
 </head>
 
 <body>
@@ -13,14 +15,18 @@
         </div>
 
         <div class="todo-list">
-            <div class="todo-action">
-                <input type="checkbox">
-                <div class="todo-label">Learn css</div>
-                <div class="trash-box">Delete action</div>
-            </div>
+            <ul id="taskList" class="actions-list">
+            </ul>
+            <button type="button" class="collapsible">Completed actions</button>
+            <ul id="completedTaskList" class="actions-list completed">
+            </ul>
+            <script src="..\scripts\collapsible_list.js"></script>
         </div>
-        <div class="add-action">New action text</div>
-    </div>
+        <div class="append-action-block">
+            <input type="text" id="newTask" class="new-action-name" placeholder="Enter a new task">
+            <button id="addTaskBtn">Add Task</button>
+        </div>
+        <script src="..\scripts\append_action.js"></script>
 </body>
 
 </html>
