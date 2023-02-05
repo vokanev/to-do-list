@@ -1,0 +1,18 @@
+.append-action-block {
+    display: flex;
+    border: 1px solid blue;
+    border-radius: 20px;
+}
+
+#addTaskBtn {
+    float: right;
+    text-decoration-color: blue;
+}
+
+.new-action-name {
+    width: 100%;
+    border: none;
+    border-color: transparent;
+    outline: none;
+    border-radius: 20px;
+}

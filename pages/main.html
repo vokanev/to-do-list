@@ -5,6 +5,7 @@
     <link rel="stylesheet" href="..\customisation\action_list.css">
     <link rel="stylesheet" href="..\customisation\collapsible.css">
     <link rel="stylesheet" href="..\customisation\main_page.css">
+    <link rel="stylesheet" href="..\customisation\new_action.css">
 </head>
 
 <body>
@@ -15,16 +16,14 @@
         </div>
 
         <div class="todo-list">
-            <ul id="taskList" class="actions-list">
-            </ul>
+            <ul id="taskList" class="actions-list"></ul>
             <button type="button" class="collapsible">Completed actions</button>
-            <ul id="completedTaskList" class="actions-list completed">
-            </ul>
+            <ul id="completedTaskList" class="actions-list completed"></ul>
             <script src="..\scripts\collapsible_list.js"></script>
         </div>
         <div class="append-action-block">
             <input type="text" id="newTask" class="new-action-name" placeholder="Enter a new task">
-            <button id="addTaskBtn">Add Task</button>
+            <button id="addTaskBtn"><img src="..\res\appendItem.png"></button>
         </div>
         <script src="..\scripts\append_action.js"></script>
 </body>
