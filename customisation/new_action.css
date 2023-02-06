@@ -1,4 +1,9 @@
 .append-action-block {
+    position: absolute;
+    bottom: 1%;
+    width: 98%;
+    margin-left: 1%;
+    margin-right: 1%;
     display: flex;
     border: 1px solid blue;
     border-radius: 20px;
@@ -7,6 +12,13 @@
 #addTaskBtn {
     float: right;
     text-decoration-color: blue;
+    background: transparent;
+    border: none;
+}
+
+.addTaskIcon {
+    max-height: 30px;
+    width: auto;
 }
 
 .new-action-name {
@@ -15,4 +27,5 @@
     border-color: transparent;
     outline: none;
     border-radius: 20px;
+    margin-left: 1%;
 }

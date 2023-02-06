@@ -11,3 +11,12 @@
 .completed {
     text-decoration: line-through;
 }
+
+.action-item {
+    display: flex;
+}
+
+.task-actions {
+    margin-left: auto;
+    margin-right: 1%;
+}
