@@ -79,3 +79,18 @@ taskInput.addEventListener('keypress', function (event) {
     addTaskBtn.click();
   }
 })
+
+const list = document.getElementById("taskList");
+let currentLi;
+
+list.addEventListener("mousedown", function(e) {
+  currentLi = e.target;
+});
+
+list.addEventListener("mouseup", function(e) {
+  if (currentLi && currentLi !== e.target) {
+    list.removeChild(currentLi);
+    list.insertBefore(currentLi, e.target);
+  }
+  currentLi = null;
+});
