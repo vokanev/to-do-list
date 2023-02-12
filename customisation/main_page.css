@@ -30,3 +30,21 @@ body {
 .author-signature {
     text-align: center;
 }
+
+.message-box {
+    position: fixed;
+    right: 20px;
+    top: 20px;
+    width: 300px;
+    height: auto;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 2px 2px 5px #ccc;
+    padding: 10px;
+    display: none;
+}
+
+.message {
+    display: block;
+}
