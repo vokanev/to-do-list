@@ -34,13 +34,13 @@ const addAction =
   trashBtn.innerText = 'Delete';
   trashBtn.className = 'delete-btn';
   trashBtn.addEventListener('click', function() {
-    dialogButtonsContainer.hidden = false;
+    dialogButtonsContainer.style.display = "contents";
     trashBtn.hidden = true;
   });
 
   const dialogButtonsContainer = document.createElement('div');
   dialogButtonsContainer.className = 'dialog-buttons';
-  dialogButtonsContainer.hidden = true;
+  dialogButtonsContainer.style.display = "none";
 
   const confirmButton = document.createElement('button');
   confirmButton.innerText = 'Confirm';
@@ -50,7 +50,7 @@ const addAction =
     } else {
       completedTaskList.removeChild(taskLi);
     }
-    dialogButtonsContainer.hidden = true;
+  dialogButtonsContainer.style.display = "none";
     trashBtn.hidden = false;
   })
 
@@ -58,7 +58,7 @@ const addAction =
   denyButton.innerText = 'Deny';
   denyButton.addEventListener('click', function() {
     dialogButtonsContainer.style.display = 'hidden';
-    dialogButtonsContainer.hidden = true;
+    dialogButtonsContainer.style.display = "none";
     trashBtn.hidden = false;
   })
 
@@ -83,11 +83,11 @@ const addAction =
   const taskText = document.createTextNode(taskValue);
   taskLi.appendChild(taskText);
   taskActionsContainer.appendChild(trashBtn);
-  taskActionsContainer.appendChild(editButton);
   dialogButtonsContainer.appendChild(confirmButton);
   dialogButtonsContainer.appendChild(denyButton);
-  taskLi.appendChild(taskActionsContainer);
   taskActionsContainer.appendChild(dialogButtonsContainer);
+  taskActionsContainer.appendChild(editButton);
+  taskLi.appendChild(taskActionsContainer);
   taskList.appendChild(taskLi);
 
   taskInput.value = '';
@@ -102,26 +102,33 @@ taskInput.addEventListener('keypress', function(event) {
   }
 })
 
-const clearButton = document.getElementById('deleteAll');
+const clearAllButton = document.getElementById('deleteAll');
+const clearCompletedButton = document.getElementById('deleteCompleted');
 const clearDialogContainer = document.getElementById('confirmationButtons');
 const clearAcceptButton = document.getElementById('allDeleteConfirmButton');
 const clearDenyButton = document.getElementById('allDeleteDenyButton');
 
 clearDenyButton.addEventListener('click', function(){
-  clearDialogContainer.hidden = true;
-  clearButton.hidden = false;
+  clearDialogContainer.style.display = "none";
+  clearAllButton.hidden = false;
 });
 
-clearButton.addEventListener('click', function(){
-  clearDialogContainer.hidden = false;
-  clearButton.hidden = true;
+clearAllButton.addEventListener('click', function(){
+  clearDialogContainer.style.display = "contents";
+  clearAllButton.hidden = true;
 });
 
 clearAcceptButton.addEventListener('click', function(){
   clearList(taskList);
   clearList(completedTaskList);
-  clearDialogContainer.hidden = true;
-  clearButton.hidden = false;
+  showMessage("Actions cleared!");
+  clearDialogContainer.style.display = "none";
+  clearAllButton.hidden = false;
+});
+
+clearCompletedButton.addEventListener('click', function(){
+  clearList(completedTaskList);
+  showMessage("Completed actions cleared!");
 });
 
 function clearList(list) {
@@ -132,22 +139,4 @@ function clearList(list) {
       list.firstChild.remove();
     }
   }
-  showMessage("Actions cleared!");
-}
-
-const messageBox = document.getElementById('messageBox');
-function showMessage(message) {
-  console.log(message);
-  const messageBlock = document.createElement('div');
-  messageBlock.className = 'errors';
-  messageBlock.textContent = message;
-  messageBox.appendChild(messageBlock);
-  messageBox.style.display = "block";
-
-  setTimeout(() => {
-      messageBox.removeChild(messageBlock);
-      if (!messageBox.children.length) {
-          messageBox.style.display = 'none';
-      }
-  }, 5000);
 }
