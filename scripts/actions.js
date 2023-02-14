@@ -1,4 +1,4 @@
-const ANIMATION_DURATION = 2000;
+const ANIMATION_DURATION = 100;
 
 const taskInput = document.getElementById('newTask');
 const addTaskBtn = document.getElementById('addTaskBtn');
@@ -24,8 +24,9 @@ const addAction =
       let styleCopy = taskLi.style;
       let newTop = newParent.getBoundingClientRect().top;
       console.log(`old top: ${previousTop}\nnew top: ${newTop}`);
-      animation(taskLi, previousTop, newTop, ANIMATION_DURATION);
-      addElementToCollapsible(newParent, taskLi);
+      // animation(taskLi, previousTop, newTop, ANIMATION_DURATION);
+      animation(taskLi, taskLi.parentNode, newParent, ANIMATION_DURATION);
+      // addElementToCollapsible(newParent, taskLi);
       
       console.log(`old top: ${previousTop}\nnew top: ${newTop}`);
       // taskLi.style.position = "unset";
@@ -102,13 +103,14 @@ const addAction =
     taskInput.value = '';
   }
 
-function animation(element, topStart, topFinish, duration) {
+function animation(element, oldParent, newParent, duration) {
   let start = Date.now(); // remember start time
   let defaultStyle = element.style;
   element.style.height = element.offsetHeight + "px";
   element.style.width = element.offsetWidth + "px";
   element.style.position = "absolute";
-  let eps = (topFinish - topStart) / duration;
+  let top = element.getBoundingClientRect().top;
+  let eps = (newParent.getBoundingClientRect().bottom - top) / duration;
   let timer = setInterval(function () {
     // how much time passed from the start?
     let timePassed = Date.now() - start;
@@ -116,6 +118,7 @@ function animation(element, topStart, topFinish, duration) {
     if (timePassed >= duration) {
       clearInterval(timer); // finish the animation after 2 seconds
       element.style = defaultStyle;
+      addElementToCollapsible(newParent, element);
       return;
     }
 
@@ -125,7 +128,7 @@ function animation(element, topStart, topFinish, duration) {
   }, 20);
 
   function draw(timePassed) {
-    element.style.top = topStart + timePassed * eps + 'px';
+    element.style.top = top + eps * timePassed + 'px';
   }
 }
 
@@ -140,11 +143,13 @@ taskInput.addEventListener('keypress', function (event) {
 
 function addElementToCollapsible(collapsible, element) {
   collapsible.appendChild(element);
+  console.log(collapsible.previousElementSibling.classList.contains("active"));
   if (collapsible.previousElementSibling.classList.contains("active")) {
     collapsible.style.maxHeight =
       collapsible.scrollHeight + 'px';
     collapsible.style.transition = "none";
   }
+  console.log(element.getBoundingClientRect().top);
 }
 
 const clearAllButton = document.getElementById('deleteAll');
