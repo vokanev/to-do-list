@@ -1,10 +1,7 @@
 .append-action-block {
-    position: absolute;
-    bottom: 1%;
-    width: 98%;
+    display: flex;
     margin-left: 1%;
     margin-right: 1%;
-    display: flex;
     border: 1px solid blue;
     border-radius: 20px;
 }

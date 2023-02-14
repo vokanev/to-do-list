@@ -1,10 +1,11 @@
 #completedTaskList {
     max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.2s ease-out;
+    /* transition: max-height 0.2s ease-out; */
 }
 
 .actions-list {
+    flex-direction: column;
+    overflow: hidden;
     text-align: left;
 }
 
@@ -23,4 +24,9 @@
 
 #confirmationButtons {
     display: none;
+}
+
+.todo-list {
+    display: flex;
+    flex-direction: column;
 }
