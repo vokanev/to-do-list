@@ -1,4 +1,4 @@
-const ANIMATION_DURATION = 100;
+const ANIMATION_DURATION = 200;
 
 const taskInput = document.getElementById('newTask');
 const addTaskBtn = document.getElementById('addTaskBtn');
@@ -8,123 +8,112 @@ let currentLi;
 let list;
 
 const addAction =
-  function () {
-    const taskValue = taskInput.value;
-    if (!taskValue) return;
+    function() {
+  const taskValue = taskInput.value;
+  if (!taskValue) return;
 
-    const taskLi = document.createElement('li');
-    taskLi.className = 'action-item';
-    const taskCheckbox = document.createElement('input');
-    taskCheckbox.type = 'checkbox';
-    taskCheckbox.addEventListener('change', function () {
-      taskLi.classList.toggle('completed');
-      let previousTop = taskLi.getBoundingClientRect().top;
-      let newParent = taskLi.parentNode === taskList ?
-      completedTaskList : taskList;
-      let styleCopy = taskLi.style;
-      let newTop = newParent.getBoundingClientRect().top;
-      console.log(`old top: ${previousTop}\nnew top: ${newTop}`);
-      // animation(taskLi, previousTop, newTop, ANIMATION_DURATION);
-      animation(taskLi, taskLi.parentNode, newParent, ANIMATION_DURATION);
-      // addElementToCollapsible(newParent, taskLi);
-      
-      console.log(`old top: ${previousTop}\nnew top: ${newTop}`);
-      // taskLi.style.position = "unset";
-      // if (taskLi.parentNode === taskList) {
-      //   addElementToCollapsible(completedTaskList, taskLi);
-      // } else {
-      //   addElementToCollapsible(taskList, taskLi);
-      // }
-    });
+  const taskLi = document.createElement('li');
+  taskLi.className = 'action-item';
+  const taskCheckbox = document.createElement('input');
+  taskCheckbox.type = 'checkbox';
+  taskCheckbox.addEventListener('change', function() {
+    taskLi.classList.toggle('completed');
+    let previousTop = taskLi.getBoundingClientRect().top;
+    let newParent =
+        taskLi.parentNode === taskList ? completedTaskList : taskList;
+    let styleCopy = taskLi.style;
+    let newTop = newParent.getBoundingClientRect().top;
+    animation(taskLi, taskLi.parentNode, newParent, ANIMATION_DURATION);
+  });
 
-    const taskActionsContainer = document.createElement('div');
-    taskActionsContainer.className = 'task-actions';
+  const taskActionsContainer = document.createElement('div');
+  taskActionsContainer.className = 'task-actions';
 
-    const trashBtn = document.createElement('button');
-    trashBtn.innerText = 'Delete';
-    trashBtn.className = 'delete-btn';
-    trashBtn.addEventListener('click', function () {
-      dialogButtonsContainer.style.display = "contents";
-      trashBtn.hidden = true;
-    });
+  const trashBtn = document.createElement('button');
+  trashBtn.classList = 'trash-box icon';
+  trashBtn.addEventListener('click', function() {
+    dialogButtonsContainer.style.display = 'contents';
+    trashBtn.hidden = true;
+  });
 
-    const dialogButtonsContainer = document.createElement('div');
-    dialogButtonsContainer.className = 'dialog-buttons';
-    dialogButtonsContainer.style.display = "none";
+  const dialogButtonsContainer = document.createElement('div');
+  dialogButtonsContainer.classList = ['dialog-buttons', 'action-button'];
+  dialogButtonsContainer.style.display = 'none';
 
-    const confirmButton = document.createElement('button');
-    confirmButton.innerText = 'Confirm';
-    confirmButton.addEventListener('click', function () {
-      if (taskLi.parentNode === taskList) {
-        taskList.removeChild(taskLi);
-      } else {
-        completedTaskList.removeChild(taskLi);
-      }
-      dialogButtonsContainer.style.display = "none";
-      trashBtn.hidden = false;
-    })
+  const confirmButton = document.createElement('button');
+  confirmButton.classList = 'icon acceptButton';
+  confirmButton.addEventListener('click', function() {
+    if (taskLi.parentNode === taskList) {
+      taskList.removeChild(taskLi);
+    } else {
+      completedTaskList.removeChild(taskLi);
+    }
+    dialogButtonsContainer.style.display = 'none';
+    trashBtn.hidden = false;
+  })
 
-    const denyButton = document.createElement('button');
-    denyButton.innerText = 'Deny';
-    denyButton.addEventListener('click', function () {
-      dialogButtonsContainer.style.display = 'hidden';
-      dialogButtonsContainer.style.display = "none";
-      trashBtn.hidden = false;
-    })
+  const denyButton = document.createElement('button');
+  denyButton.classList = 'icon denyButton';
+  denyButton.addEventListener('click', function() {
+    dialogButtonsContainer.style.display = 'hidden';
+    dialogButtonsContainer.style.display = 'none';
+    trashBtn.hidden = false;
+  })
 
-    const editButton = document.createElement('button');
-    editButton.innerText = 'Replace';
-    editButton.addEventListener('mousedown', function (e) {
-      currentLi = e.target.parentNode.parentNode;
-      list = currentLi.parentNode;
-    });
+  const editButton = document.createElement('button');
+  editButton.classList = 'icon replace';
+  editButton.addEventListener('mousedown', function(e) {
+    currentLi = e.target.parentNode.parentNode;
+    list = currentLi.parentNode;
+  });
 
-    editButton.addEventListener('mouseup', function (e) {
-      let newLi = e.target.parentNode.parentNode;
-      let currentList = newLi.parentNode;
-      if (currentLi && currentLi !== newLi && currentList === list) {
-        list.removeChild(currentLi);
-        list.insertBefore(currentLi, e.target.parentNode.parentNode);
-      }
-      currentLi = null;
-    });
+  editButton.addEventListener('mouseup', function(e) {
+    let newLi = e.target.parentNode.parentNode;
+    let currentList = newLi.parentNode;
+    if (currentLi && currentLi !== newLi && currentList === list) {
+      list.removeChild(currentLi);
+      list.insertBefore(currentLi, e.target.parentNode.parentNode);
+    }
+    currentLi = null;
+  });
 
-    taskLi.appendChild(taskCheckbox);
-    const taskText = document.createTextNode(taskValue);
-    taskLi.appendChild(taskText);
-    taskActionsContainer.appendChild(trashBtn);
-    dialogButtonsContainer.appendChild(confirmButton);
-    dialogButtonsContainer.appendChild(denyButton);
-    taskActionsContainer.appendChild(dialogButtonsContainer);
-    taskActionsContainer.appendChild(editButton);
-    taskLi.appendChild(taskActionsContainer);
-    addElementToCollapsible(taskList, taskLi);
+  taskLi.appendChild(taskCheckbox);
+  const taskText = document.createTextNode(taskValue);
+  taskLi.appendChild(taskText);
+  taskActionsContainer.appendChild(trashBtn);
+  dialogButtonsContainer.appendChild(confirmButton);
+  dialogButtonsContainer.appendChild(denyButton);
+  taskActionsContainer.appendChild(dialogButtonsContainer);
+  taskActionsContainer.appendChild(editButton);
+  taskLi.appendChild(taskActionsContainer);
+  addElementToCollapsible(taskList, taskLi);
 
-    taskInput.value = '';
-  }
+  taskInput.value = '';
+}
 
 function animation(element, oldParent, newParent, duration) {
-  let start = Date.now(); // remember start time
+  let start = Date.now();  // remember start time
   let defaultStyle = element.style;
-  element.style.height = element.offsetHeight + "px";
-  element.style.width = element.offsetWidth + "px";
-  element.style.position = "absolute";
+  element.style.height = element.offsetHeight + 'px';
+  element.style.width = element.offsetWidth + 'px';
+  element.style.position = 'absolute';
   let top = element.getBoundingClientRect().top;
-  let eps = (newParent.getBoundingClientRect().bottom - top) / duration;
-  let timer = setInterval(function () {
-    // how much time passed from the start?
+  let newTop =
+      newParent.previousElementSibling.classList.contains('completed') ?
+      newParent.previousElementSibling.getBoundingClientRect().bottom :
+      newParent.getBoundingClientRect().bottom;
+  let eps = (newTop - top) / duration;
+  let timer = setInterval(function() {
     let timePassed = Date.now() - start;
 
     if (timePassed >= duration) {
-      clearInterval(timer); // finish the animation after 2 seconds
+      clearInterval(timer);
       element.style = defaultStyle;
       addElementToCollapsible(newParent, element);
       return;
     }
 
-    // draw the animation at the moment timePassed
     draw(timePassed);
-
   }, 20);
 
   function draw(timePassed) {
@@ -134,7 +123,7 @@ function animation(element, oldParent, newParent, duration) {
 
 addTaskBtn.addEventListener('click', addAction);
 
-taskInput.addEventListener('keypress', function (event) {
+taskInput.addEventListener('keypress', function(event) {
   if (event.key === 'Enter') {
     event.preventDefault();
     addTaskBtn.click();
@@ -143,13 +132,11 @@ taskInput.addEventListener('keypress', function (event) {
 
 function addElementToCollapsible(collapsible, element) {
   collapsible.appendChild(element);
-  console.log(collapsible.previousElementSibling.classList.contains("active"));
-  if (collapsible.previousElementSibling.classList.contains("active")) {
-    collapsible.style.maxHeight =
-      collapsible.scrollHeight + 'px';
-    collapsible.style.transition = "none";
+  if (collapsible.previousElementSibling.classList.contains('active')) {
+    collapsible.style.maxHeight = 'none';
+    collapsible.style.minHeight = 'fit-content';
+    collapsible.style.transition = 'none';
   }
-  console.log(element.getBoundingClientRect().top);
 }
 
 const clearAllButton = document.getElementById('deleteAll');
@@ -158,32 +145,32 @@ const clearDialogContainer = document.getElementById('confirmationButtons');
 const clearAcceptButton = document.getElementById('allDeleteConfirmButton');
 const clearDenyButton = document.getElementById('allDeleteDenyButton');
 
-clearDenyButton.addEventListener('click', function () {
-  clearDialogContainer.style.display = "none";
+clearDenyButton.addEventListener('click', function() {
+  clearDialogContainer.style.display = 'none';
   clearAllButton.hidden = false;
 });
 
-clearAllButton.addEventListener('click', function () {
-  clearDialogContainer.style.display = "contents";
+clearAllButton.addEventListener('click', function() {
+  clearDialogContainer.style.display = 'contents';
   clearAllButton.hidden = true;
 });
 
-clearAcceptButton.addEventListener('click', function () {
+clearAcceptButton.addEventListener('click', function() {
   clearList(taskList);
   clearList(completedTaskList);
-  showMessage("Actions cleared!");
-  clearDialogContainer.style.display = "none";
+  showMessage('Actions cleared!');
+  clearDialogContainer.style.display = 'none';
   clearAllButton.hidden = false;
 });
 
-clearCompletedButton.addEventListener('click', function () {
+clearCompletedButton.addEventListener('click', function() {
   clearList(completedTaskList);
-  showMessage("Completed actions cleared!");
+  showMessage('Completed actions cleared!');
 });
 
 function clearList(list) {
   while (list.firstChild) {
-    if (list.firstChild.tagName === "li") {
+    if (list.firstChild.tagName === 'li') {
       list.removeChild(list.firstChild);
     } else {
       list.firstChild.remove();

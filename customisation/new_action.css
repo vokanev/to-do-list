@@ -2,19 +2,18 @@
     display: flex;
     margin-left: 1%;
     margin-right: 1%;
-    border: 1px solid blue;
+    border: 1px solid cadetblue;
     border-radius: 20px;
 }
 
 #addTaskBtn {
-    float: right;
-    text-decoration-color: blue;
+    text-decoration-color: cadetblue;
     background: transparent;
     border: none;
 }
 
 .addTaskIcon {
-    max-height: 30px;
+    max-height: 20px;
     width: auto;
 }
 

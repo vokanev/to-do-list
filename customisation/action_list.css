@@ -15,11 +15,29 @@
 
 .action-item {
     display: flex;
+    margin-bottom: 2px;
+    margin-right: 4%;
+    font-weight: bold;
+    color: cadetblue;
+    hyphens: auto;
+    word-break: break-all;
+    align-items: center;
 }
 
+.action-item:hover {
+    background-color: lightgray;
+    border-radius: 3px;
+    padding: 2px;
+    font-size: larger;
+}
+
+
 .task-actions {
+    display: flex;
     margin-left: auto;
     margin-right: 1%;
+    min-width: fit-content;
+    align-items: center;
 }
 
 #confirmationButtons {
@@ -29,4 +47,33 @@
 .todo-list {
     display: flex;
     flex-direction: column;
+}
+
+.trash-box {
+    background-image: url('../res/trash.png');
+    padding-right: 1%;
+}
+
+.trash-box:hover {
+    background-image: url('../res/trash-red.png');
+}
+
+.replace {
+    background-image: url('../res/move.png');
+}
+
+.replace:hover {
+    cursor: pointer;
+}
+
+.icon {
+    background-color: transparent;
+    background-size: contain;
+    border: none;
+    width: 20px;
+    height: 20px;
+}
+
+.icon:hover {
+    cursor: pointer;
 }

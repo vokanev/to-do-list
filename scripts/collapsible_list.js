@@ -6,10 +6,13 @@ for (i = 0; i < collapsible.length; i++) {
     this.classList.toggle("active");
     var content = this.nextElementSibling;
     content.style.transition = "max-height 0.2s ease-out";
+
     if (!this.classList.contains("active")) {
       content.style.maxHeight = "0px";
+      content.style.minHeight = "none";
     } else {
-      content.style.maxHeight = content.scrollHeight + "px";
+      content.style.maxHeight = "none";
+      content.style.minHeight = "fit-content";
     }
   });
 }
