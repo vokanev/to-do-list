@@ -1,0 +1,28 @@
+ul {
+    list-style-type: none;
+}
+
+.collapsible {
+    color: cadetblue;
+    background-color: transparent;
+    cursor: pointer;
+    padding: 18px;
+    width: 100%;
+    border: none;
+    text-align: left;
+    outline: none;
+    font-size: 17px;
+    font-weight: bolder;
+}
+
+.collapsible::before {
+    content: '\25BA';
+    font-size: 25spx;
+    float: left;
+    margin-right: 5px;
+    transition: transform 0.5s;
+}
+
+.active::before {
+    transform: rotateZ(90deg);
+}

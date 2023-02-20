@@ -1,0 +1,27 @@
+.append-action-block {
+    display: flex;
+    margin-left: 1%;
+    margin-right: 1%;
+    border: 1px solid cadetblue;
+    border-radius: 20px;
+}
+
+#addTaskBtn {
+    text-decoration-color: cadetblue;
+    background: transparent;
+    border: none;
+}
+
+.addTaskIcon {
+    max-height: 20px;
+    width: auto;
+}
+
+.new-action-name {
+    width: 100%;
+    border: none;
+    border-color: transparent;
+    outline: none;
+    border-radius: 20px;
+    margin-left: 1%;
+}
